@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheatTable CheatEngineTableVersion="27">
+  <Forms>
+    <UDF1 Class="TCEForm" Encoding="Ascii85">t7Tze2nldAU:MM2b.}cxWeIh0Gi32eO*FuZ(B+4Fnwg$a!u*{OIV8V.IfaomJTs+vgV{,R-8r$KBr]vcP43y8RZll.e7/_t]#n7]*@C5;,VQM(@3y#H(vxv1+3r-7oRgWFR^{SO8@VVh/Dci8lV6/5(Iz(]%w,S:3)m,dXXgNkfLOdB!ZR-/u^hf*v51_cxWqB1Jh8HvffMLtr[z#:^5)z:1LATfZm7eVBth/G.)/E5n+r]?^uc^-o[4Kx,BN(hj@3y3^a{Y:CTFwr!Hoj+IYJVX^EJdji/lS}uvusX3997]1a0Jbxntprg$+y)=_!m#8K!kcXx1?ewayr._9miQ6Mfn-[v!NP:bbxWY,3QVY3H-u3xNpJT4OY8nXp:Gg4J3bOlt,6cFljbdFu1s%{.hN(@9zMz[if;%_;RdHkx7(S8P@3;uPw;yceI9rf62OV71Z:yOmf1SLo?S4Nqt9d$G0U+^%t:Le;n.QdX;%nqv+w94yJ[$(Q8;vnM:VGV58[WK7%4)QISGYMTXiFJiL{XwlQPAnTql!.)2H)5z!.VBi2,7m{HqTEqdR4LLmXN;Yo.5[6b.F#wGK3$pXVWWgjbQvm/</UDF1>
+  </Forms>
+  <CheatEntries/>
+  <UserdefinedSymbols/>
+  <Comments>Info about this table:
+</Comments>
+  <LuaScript>function CETimer1Timer(sender)
+  if (getOpenedProcessID()==0) then
+    openProcess("The Scroll Of Taiwu Alpha V1.0.exe")
+  else
+    setProperty(UDF1, "Caption", "已就绪")
+  end
+end
+
+function FormClose(sender)
+  closeCE()
+  return caFree
+end
+
+function CEButton1Click(sender)
+  --UIDate.ChangeTime--
+  local addr = AOBScan("04 59 16 28 ?? ?? ?? ?? 7D", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        writeBytes(addr[i].."+0", 0x16);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+function CEButton2Click(sender)
+  --ReadBook.UpdateRead--
+  local addr = AOBScan("64 3F ?? ?? ?? ?? 00 02 02 17 28 ?? ?? ?? ?? 28", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        writeBytes(addr[i], 0x00);
+        writeBytes(addr[i].."+8", 0x1F, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+function CEButton3Click(sender)
+  --NewGame.GetAbilityP--
+  local addr = AOBScan("00 1F 0A 0A 16 0B 38", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        writeBytes(addr[i].."+2", 0x7F);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+function CEButton4Click(sender)
+  --HomeSystem.StudySkillUp--
+  local addr = AOBScan("3C ?? ?? ?? ?? 18 38 ?? ?? ?? ?? 17 16 16 17", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        writeBytes(addr[i], 0x3C, 0x00, 0x00, 0x00, 0x00, 0x1F, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00);
+        writeBytes(addr[i].."+E", 0x16);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+
+function CEButton5Click(sender)
+  --HomeSystem.StudySkillUp--
+  local addr = AOBScan("3C ?? ?? ?? ?? 18 38 ?? ?? ?? ?? 17 16 17", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        writeBytes(addr[i], 0x3C, 0x00, 0x00, 0x00, 0x00, 0x1F, 0x64, 0x00, 0x00, 0x00, 0x00, 0x00);
+        writeBytes(addr[i].."+D", 0x16);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+
+function CEButton6Click(sender)
+  --DateFile.ChangePlaceResource--
+  local addr = AOBScan("02 7B ?? ?? ?? ?? 03 6F ?? ?? ?? ?? 04 6F ?? ?? ?? ?? 05 94 0E ?? 3B ?? ?? ?? ?? 00", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        --02 7B ?? ?? ?? ?? 03 6F ?? ?? ?? ?? 04 6F ?? ?? ?? ?? 05 94 0E 04 3B ?? ?? ?? ?? 00
+        --20 E8 03 00 00 10 04 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+        writeBytes(addr[i], 0x20, 0xE8, 0x03, 0x00, 0x00, 0x10, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+function CEButton7Click(sender)
+  --GetQuquWindow.GetQuquButton--
+  local addr1 = AOBScan("3A ?? ?? ?? ?? 02 7B ?? ?? ?? ?? 3A ?? ?? ?? ?? 00 38 ?? ?? ?? ?? 02 16", "+W-C", 0)
+  local addr2 = AOBScan("02 03 28 ?? ?? ?? ?? 00 38 ?? ?? ?? ?? 00 02 7B", "+W-C", 0)
+  if (addr1 and addr2 and addr1.Count == addr2.Count and addr1.Count &lt;= 2) then
+    for i = 0, addr1.Count-1 do
+        --Calculate the absolute address of ret
+        local addrRet = (tonumber(addr1[i], 16) + 0x11 + 5) + readInteger(addr1[i].."+12")
+
+        --Jump to GetQuqu at addr1
+        local distance = tonumber(addr2[i], 16) - tonumber(addr1[i], 16)
+        local br1 = distance - 5
+        local br2 = br1 - 11
+        writeInteger(addr1[i].."+1", br1)
+        writeInteger(addr1[i].."+C", br2)
+
+        --Jump to ret at after addr2
+        local br3 = addrRet - (tonumber(addr2[i], 16) + 0x08 + 5)
+        writeInteger(addr2[i].."+9", br3)
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+function CEButton8Click(sender)
+  --PeopleLifeAI.AISetChildren--
+  local addr = AOBScan("08 39 ?? ?? ?? ?? 1F ?? 38 ?? ?? ?? ?? 1F ?? 0D", "+W-C", 0)
+  if (addr and addr.Count &lt;= 2) then
+    for i = 0, addr.Count-1 do
+        --08 39 ?? ?? ?? ?? 1F ?? 38 ?? ?? ?? ?? 1F ?? 0D
+        --                     05
+        writeBytes(addr[i].."+7", 0x00);
+    end
+    setProperty(sender, "Enabled", false)
+  end
+end
+
+UDF1.show()
+</LuaScript>
+</CheatTable>
